@@ -1,0 +1,75 @@
+﻿@model BSMVCprj.Models.TokenModel
+
+<div class="text-center">
+    <a asp-controller="Home" asp-action="Index" class="btn btn-outline-danger btn-lg">Go Back</a>
+</div>
+
+<div class="container text-center" id="div">
+    <table class="text-center">
+        <tbody class="text-center">
+            <tr class="text-center" id="firsttr">
+                <td><img src="~/photos/shutterstock_106919999.0.jpg" alt="RockPaperScissor" width="300" height="300"/></td>
+                <td><img src="~/photos/slot/istockphoto-1194316294-612x612.jpg" alt="Slot" width="300" height="300"/></td>
+                <td id="tokenimg"><img src="~/photos/8423.png" alt="token" width="300" height="300"/></td>
+                <td id="removetok"><img src="~/photos/8423.png" alt="token" width="300" height="300" /></td>
+
+            </tr>
+            <tr class="text-center" id="secondtr">
+                <td><a asp-controller="Gamble" asp-action="PlayRPS" class="btn btn-outline-primary btn-lg">Play</a></td>
+                <td><a asp-controller="Gamble" asp-action="PlaySlot" class="btn btn-outline-primary btn-lg">Play</a></td>
+                <td class="btn btn-outline-primary btn-lg" onclick="CreateToken()" id="token">GenerateToken</td>
+                <td class="btn btn-outline-danger btn-lg"  id="remov"  onclick="DeleteToken()">DeleteToken</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="alert-danger" id="danger">
+        @if (ViewData["tokenflag"] != null)
+        {
+            @ViewData["tokenflag"]
+        }
+    </div>
+</div>
+<script>
+    $(document).ready(function(){
+        $("#removetok").hide();
+        $("#remov").hide();
+    })
+    function CreateToken(){
+        $.ajax({
+            url: "/Gamble/GenerateToken",
+            Type: "GET",
+            contentType: 'application/x-www-form-urlencoded;charset=utf-8',
+            dataType: "json",
+            success: function () {
+                $("#tokenimg").hide();
+                $("#token").hide();
+                $("#danger").hide();
+                $("#removetok").show();
+                $("#remov").show();
+                alert("Your token successfully Generated")
+            },
+            error: function () {
+                alert("Token Failed");
+            }
+        })
+    }
+    function DeleteToken(){
+        $.ajax({
+            url: "/Gamble/DeleteToken",
+            Type: "GET",
+            contentType: 'application/x-www-form-urlencoded;charset=utf-8',
+            dataType: "json",
+            success: function () {
+                $("#tokenimg").show();
+                $("#token").show();
+                $("#danger").show();
+                $("#removetok").hide();
+                $("#remov").hide();
+                alert("Your token succesfully Deleted");
+            },
+            error: function () {
+                alert("Delete Failed");
+            }
+        })
+    }
+</script>

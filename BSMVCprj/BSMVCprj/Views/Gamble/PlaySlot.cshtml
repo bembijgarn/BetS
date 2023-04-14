@@ -1,0 +1,32 @@
+﻿@model BSMVCprj.Models.SlotModel
+<header>
+    <link rel="stylesheet" href="~/css/Slot.css">
+</header>
+<body>
+<button type="submit" class="btn btn-outline-primary btn-lg" onclick="Slotmachine()">Roll</button>
+<div class="container text-center">
+        <div class="container text-center">
+            <div class="alert-danger">
+                @if (TempData["Noamount"] != null)
+                {
+                    @TempData["Noamount"]
+                }
+            </div>
+        </div>
+    <table class="center" id="slottable">
+        <tbody class="text-center" id="bodd">
+            <tr id="firsttr">
+                <td><img src="~/photos/slot/apple.png" alt="rock" width="200" height="200" /></td>
+                <td><img src="~/photos/slot/casino.png" alt="paper" width="200 " height="200" /></td>
+                <td><img src="~/photos/slot/watermelon.png" alt="scissor" width="200" height="200" /></td>
+            </tr>
+            <tr class="text-center">
+                <td>
+                    <a asp-controller="Gamble" asp-action="Gambling" class="btn btn-outline-danger btn-lg">Cancel Game</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+<script src="~/js/Gambling.js"></script>

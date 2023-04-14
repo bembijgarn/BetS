@@ -1,0 +1,41 @@
+﻿@using System.Security.Claims
+
+@if (User.Identity.IsAuthenticated)
+{
+    <form method="post" class="form-inline" asp-controller="LoginRegistration" asp-action="Logout">
+        Welcome @User.Claims.Where(x => x.Type == ClaimTypes.NameIdentifier).FirstOrDefault().Value
+        || 
+        <label id="labbalance" ></label>
+        <a class="btn btn-link" asp-area="" asp-controller="Userdetails" asp-action="Userdetails">Your Details</a>
+        <button type="submit" class="m1-2 btn btn-link">Logout</button>
+    </form>
+
+}
+else
+{
+    <a class="btn btn-link" asp-controller="LoginRegistration" asp-action="Login">Login</a>
+    <a class="btn btn-link" asp-controller="LoginRegistration" asp-action="Registration">Sign up</a>
+}
+
+<script>
+    $(document).ready(function(){
+        updatebalance();
+    });
+        setInterval(updatebalance, 10000);
+    
+    
+    function updatebalance(){
+    $.ajax({
+        url: "/Balance/Userbalance",
+        Type:"GET",
+        contentType: 'application/x-www-form-urlencoded;charset=utf-8',
+        dataType: "json",
+        success:function(data){
+                $("#labbalance").text(`Balance:${data}`);
+        },
+        error:function(){
+            
+        }
+    })
+    }
+</script>

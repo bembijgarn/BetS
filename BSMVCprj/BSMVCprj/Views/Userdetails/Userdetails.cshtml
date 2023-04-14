@@ -1,0 +1,88 @@
+﻿@model BSMVCprj.Models.UserAccountM
+@{
+    ViewData["Title"] = "Details";
+}
+
+
+<div class="text-center">
+    <table class="table table-striped border" id="table1">
+        <thead>
+            <tr class="table-secondary">
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Lastname)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IdentityId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Username)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Balance)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BankCard)
+                </th>
+                <th>
+
+                </th>
+            </tr>
+        </thead>
+        <tbody id="table_data" class="text-center">
+        </tbody>
+    </table>
+</div>
+<div class="madal fade modal" id="Usermodal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="text-info modal-title">Update Details</h1>
+                <button class="close text-danger" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form method="post">
+                    <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+                    <div class="form-group">
+                        <label asp-for="@Model.Name">Name</label>
+                        <input type="text" asp-for="@Model.Name" placeholder="Enter Name" class="form-control" id="Name" autocomplete="off"/>
+                         <span class="text-danger" asp-validation-for="@Model.Name"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.Username">Lastname</label>
+                        <input type="text" asp-for="@Model.Lastname" placeholder="Enter LastName" class="form-control" id="Lastname" autocomplete="off"/>
+                        <span class="text-danger" asp-validation-for="@Model.Lastname"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.Email">Email</label>
+                        <input type="email" asp-for="@Model.Email" placeholder="Enter Email" class="form-control" id="Email" autocomplete="off" />
+                        <span class="text-danger" asp-validation-for="@Model.Email"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.Username">Username</label>
+                        <input type="text" asp-for="@Model.Username" placeholder="Enter UserName" class="form-control" id="Username" autocomplete="off" />
+                        <span class="text-danger" asp-validation-for="@Model.Username"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.BankCard">BankCard</label>
+                        <input type="number" asp-for="@Model.BankCard" placeholder="Enter BankCard" class="form-control" id="Bankcard" autocomplete="off" />
+                        <span class="text-danger" asp-validation-for="@Model.BankCard"></span>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-warning" onclick="UpdateUser()" style="display:none" id="btnupdate">Update</button>
+                <button class="btn btn-danger btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script src="~/js/Details.js"></script>

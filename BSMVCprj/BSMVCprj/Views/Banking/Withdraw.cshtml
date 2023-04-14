@@ -1,0 +1,71 @@
+﻿@model BSMVCprj.Models.MoneyTransferM
+
+@{
+    ViewData["Title"] = "Withdraw";
+}
+<header>
+    <link rel="stylesheet" href="~/css/load.css">
+
+</header>
+<div class="container border" style="padding:20px" id="container">
+    <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+    <div class="form-group row">
+        <div class="col-2">
+            <label asp-for="@Model.Amount"></label>
+        </div>
+        <div class="col-5">
+            <input type="number" asp-for="@Model.Amount" class="form-control" id="amount" autocomplete="off" />
+        </div>
+        <span class="text-danger" asp-validation-for="@Model.Amount"></span>
+
+    </div>
+    <div class="form-group row">
+        <div class="col-3">
+            <input type="submit" class="btn-primary" id="submit-button" value="Withdraw" onclick="Withdraw()"/>
+            <div class="loader" id="load" style="display:none"></div>
+        </div>
+        <div class="alert-danger" id="Fail" style="display:none">
+          <p>Withdraw Failed</p>
+        </div>
+        <div class="alert-success" id="Success" style="display:none">
+            <p>Withdraw successful</p>
+        </div>
+        <div class="col-5">
+        </div>
+    </div>
+</div>
+
+<script>
+
+    function Withdraw() {
+       $("#Success").hide();
+       $("#Fail").hide();
+       $("#load").show();
+       $("#submit-button").hide();
+        var Odata = {
+        Amount: $("#amount").val(),
+    }
+        $.ajax({
+            url: "/Banking/Wiithdraw",
+            Type: "GET",
+            data: Odata,
+            contentType: 'application/x-www-form-urlencoded;charset=utf-8',
+            dataType: "json",
+            success: function (data) {
+                $("#load").hide();
+                $("#submit-button").show();
+                if($("#amount").val() % 2 === 0){
+                $("#Success").show();
+                }else{
+                    $("#Fail").show();
+                }
+                
+               
+            },
+            error: function () {
+                alert("Insufficient Balance");
+                window.location.replace("https://localhost:44339/Banking/Withdraw")
+            }
+        })
+    };
+</script>

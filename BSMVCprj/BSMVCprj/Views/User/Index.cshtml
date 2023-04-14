@@ -1,0 +1,50 @@
+﻿@model IEnumerable<BSMVCprj.Models.UserAccountM>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<div class="text-center">
+<input type="search" id="search" placeholder="Search" autocomplete="off" onkeyup="keyfunction()">
+<table class="table table-striped border" id="table1">
+    <thead>
+        <tr class="table-secondary">
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Lastname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdentityId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Username)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Balance)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BankCard)
+            </th>
+            <th>
+
+            </th>
+        </tr>
+    </thead>
+  <tbody id="table_data" class="text-center">
+
+
+  </tbody>
+</table>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script src="~/js/list.js"></script>
+<script src="~/js/my.js"></script>

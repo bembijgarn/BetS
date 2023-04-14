@@ -1,0 +1,81 @@
+﻿@model BankingMVC.Models.Bankingmodel
+<div class="container text-center" id="Usermodal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="text-info modal-title">Payment Details</h1>
+            </div>
+            <div class="modal-body" >
+                <form method="post" id="form">
+                    <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+                    <div class="form-group">
+                        <label asp-for="@Model.Cardholder">Cardholder</label>
+                        <input type="text"  placeholder="Enter Cardholnder" class="form-control" id="Name" autocomplete="off"  required/>
+                        <span class="text-danger" asp-validation-for="@Model.Cardholder"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.Bankcard">CreditCard</label>
+                        <input type="text" asp-for="@Model.Bankcard" placeholder="Enter Bankcard" class="form-control" id="Lastname" autocomplete="off" required />
+                        <span class="text-danger" asp-validation-for="@Model.Bankcard"></span>
+                   </div>
+                   <div class="form-group">
+                        <img src="~/photo/Payment/visa.png" width="50" height="50"/>
+                        <img src="~/photo/Payment/Mastercard-logo.svg.png"width="50" height="40" />
+                        <img src="~/photo/Payment/card-apple-pay.svg" width="50" height="50" />
+                   </div>
+                    <div class="form-group" id="divamount">
+                        <label id="labelamount" style="color:blue">Amount of Deposit: @Model.Amount.00 GEL</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="hidden" id="hidinput" value="@Model.Amount"/>
+                    </div>
+                    <div class="form-group">
+                        <input id="hiddentran" type="hidden" value="@Model.TransactionId"></input>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success"  onclick="Payconfirm()" id="btnconfirm">Confirm</button>
+                <button class="btn btn-danger"  onclick="ReturnDeposit()">Reject</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function ReturnDeposit(){
+        let x = $("#hidinput").val();
+        let y = $("#hiddentran").val();
+        $.ajax({
+            url: `/Deposit/Deeposit/?TransactionId=${y}`,
+            Type: "GET",
+            contentType: 'application/x-www-form-urlencoded;charset=utf-8',
+            dataType: "json",
+            success: function () {
+                alert("Payment Rejected");
+                window.location.replace("https://localhost:44339/Banking/Deposit");
+            },
+            error: function () {
+                alert("Payment denied");
+            }
+        })
+    };
+   
+   
+    function Payconfirm() {
+        let x = $("#hidinput").val();
+        let y = $("#hiddentran").val();
+        $.ajax({
+            url: `/Deposit/Deeposit/?Amount=${x}&TransactionId=${y}`,
+            Type: "GET",
+            contentType: 'application/x-www-form-urlencoded;charset=utf-8',
+            dataType: "json",
+            success: function () {
+                alert("Payment confirm");
+                window.location.replace("https://localhost:44339/Banking/Deposit");
+            },
+            error: function () {
+                alert("Payment denied");
+            }
+        })
+    }
+</script>

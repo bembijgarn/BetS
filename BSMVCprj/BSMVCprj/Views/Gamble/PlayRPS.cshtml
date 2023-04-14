@@ -1,0 +1,54 @@
+﻿<header>
+    <link rel="stylesheet" href="~/css/Gamble.css">
+</header>
+
+<body>
+    <div class="container text-center">
+        <div class="alert-success">
+            @if (TempData["WinnerFlag"] != null)
+            {
+                @TempData["WinnerFlag"]
+            }
+        </div>
+    </div>
+    <div class="container text-center">
+        <div class="alert-danger">
+            @if (ViewData["WinnerFlag"] != null)
+            {
+                @ViewData["WinnerFlag"]
+            }
+        </div>
+    </div>
+    <div class="alert-danger">
+        @if (ViewData["tokenflag"] != null)
+        {
+            @ViewData["tokenflag"]
+        }
+    </div>
+<div class="container text-center">
+    <p class="lead text-black-50">Please Select Your Chouce</p>
+    <table class="center">
+        <tbody class="text-center">
+            <tr>
+                <td><img src="~/photos/rock.webp" alt="rock" width="300" height="300" /></td>
+                <td><img src="~/photos/paper.webp" alt="paper" width="300" height="300" /></td>
+                <td><img src="~/photos/scissors.webp" alt="scissor" width="300" height="300" /></td>
+            </tr>
+            <tr class="text-center">
+                <td>
+                    <a asp-asp-controller="Gamble" asp-action="RPS" asp-route-id="0" class="btn btn-outline-primary btn-lg">Rock</a>
+                </td>
+                <td>
+                    <a asp-controller="Gamble" asp-action="RPS" class="btn btn-outline-primary btn-lg" asp-route-id="1">Paper</a>
+                </td>
+                <td>
+                    <a asp-controller="Gamble" asp-action="RPS" class="btn btn-outline-primary btn-lg" asp-route-id="2">Scissor</a>
+                </td>
+                <td>
+                    <a asp-controller="Gamble" asp-action="Gambling" class="btn btn-outline-danger btn-lg">Cancel Game</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</body>

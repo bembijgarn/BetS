@@ -1,0 +1,44 @@
+﻿@model BSMVCprj.Models.DatetimeModel
+@{
+    ViewData["Title"] = "Transactions";
+}
+
+
+
+
+<form method="post" id="formid">
+    <div class="text-center">
+        <h3>Your Transaction History</h3>
+        <div id="appendinput">
+            <span>From</span>
+            <input type="date" asp-for="@Model.StartDate" id="datetime1" />
+            <span>To</span>
+            <input asp-for="@Model.EndDate" type="date" id="datetime2" />
+            <input type="button" id="button" class="btn btn-dark" onclick="return getdata()" value="Search" />
+            @*//blazor*@
+        </div>
+    </div>
+</form>
+
+<div class="text-center">
+    <table class="table" id="table1">
+        <thead id="head">
+            <tr>
+                <th>Id</th>
+                <th>Type</th>
+                <th>Amount</th>
+                <th>CurrentBalance</th>
+                <th>Datetime</th>
+            </tr>
+        </thead>
+        <tbody id="bodd">
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+
+<script src="~/js/Transaction.js"></script>
